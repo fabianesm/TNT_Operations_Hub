@@ -266,6 +266,7 @@
                 <input type="text" placeholder="Correo Electrónico / Usuario" name="correo_usuario" required="required">
                 <input type="password" placeholder="Contraseña" name="contrasena" required="required">
                 <input name="btningresar" class="btn boton" type="submit" value="Entrar">
+                <p class="ManualU"><a href="manual_usuarios.php">Manual de Usuario</a></p>
             </form>
 
             <!--Register-->
@@ -276,6 +277,7 @@
                 <input type="text" placeholder="Usuario" name="usuario" required="required">
                 <input type="password" placeholder="Contraseña" name="password" required="required">
                 <input id="btnregistrarse" name="btnregistrarse" class="btn boton" type="submit" value="Regístrarse">
+                <p class="ManualU"><a href="manual_usuarios.php">Manual de Usuario</a></p>
             </form>
         </div>
     </div>
