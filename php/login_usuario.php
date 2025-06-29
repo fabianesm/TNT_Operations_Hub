@@ -12,9 +12,9 @@
 
                  // Comparar la fecha de registro con la fecha actual
                  $dias_transcurridos = round((time() - strtotime($fecha_registro)) / (60 * 60 * 24));
-                 if ($dias_transcurridos >= 15) {
-                     // Si han pasado 15 días o más desde el registro, redirigir a la página de cambio de contraseña
-                     header("location: cambio_contrasena.php?id=" . $datos->id);
+                 if ($dias_transcurridos >= 45) {
+                     // Si han pasado 45 días o más desde el registro, redirigir a la página de cambio de contraseña
+                     header("location: change_password.php?id=" . $datos->id);
                      exit();
                  }
 
@@ -23,10 +23,10 @@
                 $_SESSION["rol"]=$datos->rol;
                 header("location: index.php");
             }else{
-                echo "<div class='alert alert-danger'>Acceso denegado</div>";
+                echo "<div class='alert alert-danger'>Access Denied</div>";
             }
         } else {
-            echo "<div class='alert alert-danger'>Acceso denegado</div>";
+            echo "<div class='alert alert-danger'>Access Denied</div>";
         }
     }
 ?>

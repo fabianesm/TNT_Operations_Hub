@@ -15,7 +15,7 @@
 
             echo "<script>
             setTimeout(function () {
-                window.location.href= 'permisos_administrativos.php';
+                window.location.href= 'control_equipos.php';
              }, 3000);
             </script>";
         }

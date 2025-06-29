@@ -130,7 +130,7 @@ $(document).on("click", "#btn_edit", function () {
     $.ajax({
     type: "POST",
     dataType: "json",
-    url: "permisos_administrativos_ajax.php?codaccion=mostrarpermisos&id=" + idPermiso,
+    url: "control_equipos_ajax.php?codaccion=mostrarpermisos&id=" + idPermiso,
     success: function (data) {
         $("#motivo_edit").val(data[0].motivo);
         $("#jefatura_edit").val(data[0].jefatura);
@@ -175,7 +175,7 @@ $(document).on("click", "#btn_delete", function () {
     $.ajax({
     type: "POST",
     dataType: "json",
-    url: "permisos_administrativos_ajax.php?codaccion=mostrarpermisos&id=" + idPermiso,
+    url: "control_equipos_ajax.php?codaccion=mostrarpermisos&id=" + idPermiso,
     success: function (data) {
         $("#motivo_delete").val(data[0].motivo);
         $("#jefatura_delete").val(data[0].jefatura);

@@ -142,7 +142,7 @@ $(document).on("click", "#btn_edit", function () {
     $.ajax({
     type: "POST",
     dataType: "json",
-    url: "usuarios_ajax.php?codaccion=mostrarusuario&id=" + idUser,
+    url: "users_ajax.php?codaccion=mostrarusuario&id=" + idUser,
     success: function (data) {
         $("#nombre_completo_edit").val(data[0].nombre);
         $("#correo_edit").val(data[0].correo);
@@ -156,16 +156,16 @@ $(document).on("click", "#btn_edit", function () {
 // Confirmation Editar Usuario
 $("#EditarUsuario").confirmation({
     placement: "top",
-    title: "¿Est\u00E1 seguro de guardar la información?",
+    title: "Are you sure you want to save the information?",
     btnOkClass: "btn btn-sm btn-success",
-    btnOkLabel: "Editar",
+    btnOkLabel: "Update",
     btnOkIcon: "glyphicon glyphicon-ok",
     btnCancelClass: "btn btn-sm btn-default",
-    btnCancelLabel: "Cancelar",
+    btnCancelLabel: "Cancel",
     btnCancelIcon: "glyphicon glyphicon-remove",
     onConfirm: function () {
       MensajeModal(
-        "<i class='fa fa-spinner fa-spin' style='font-size:25px;'></i>Por favor espere, estamos subiendo la informaci&oacute;n.",
+        "<i class='fa fa-spinner fa-spin' style='font-size:25px;'></i>Please wait, we are uploading the information.",
         "Green"
         );
         $("#EditarUsuario").addClass("disabled");
@@ -187,7 +187,7 @@ $(document).on("click", "#btn_delete", function () {
     $.ajax({
     type: "POST",
     dataType: "json",
-    url: "usuarios_ajax.php?codaccion=mostrarusuario&id=" + idUser,
+    url: "users_ajax.php?codaccion=mostrarusuario&id=" + idUser,
     success: function (data) {
         $("#nombre_completo_delete").val(data[0].nombre);
         $("#correo_delete").val(data[0].correo);
@@ -201,16 +201,16 @@ $(document).on("click", "#btn_delete", function () {
 // Confirmation Eliminar Usuario
 $("#EliminarUsuario").confirmation({
     placement: "top",
-    title: "¿Est\u00E1 seguro de eliminar la información?",
+    title: "Are you sure you want to delete the information?",
     btnOkClass: "btn btn-sm btn-danger",
-    btnOkLabel: "Eliminar",
+    btnOkLabel: "Delete",
     btnOkIcon: "glyphicon glyphicon-ok",
     btnCancelClass: "btn btn-sm btn-default",
-    btnCancelLabel: "Cancelar",
+    btnCancelLabel: "Cancel",
     btnCancelIcon: "glyphicon glyphicon-remove",
     onConfirm: function () {
       MensajeModal(
-        "<i class='fa fa-spinner fa-spin' style='font-size:25px;'></i>Por favor espere, estamos eliminando la informaci&oacute;n.",
+        "<i class='fa fa-spinner fa-spin' style='font-size:25px;'></i>Please wait, we are deleting the information.",
         "Green"
         );
         $("#EliminarUsuario").addClass("disabled");

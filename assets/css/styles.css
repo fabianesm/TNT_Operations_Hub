@@ -6,12 +6,18 @@
     font-family: 'Roboto', sans-serif;
 }
 
-body{
-    background-image: url(../images/bg4.jpg);
+/* body{
+    background-image: url(../images/bg1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+} */
+body{
+    background: 
+    linear-gradient(rgba(36, 28, 31, 0.85), rgba(36, 28, 31, 0.85)),
+    url('../images/bg1.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .row.pt-15 {
@@ -29,7 +35,7 @@ main{
     width: 100%;
     padding: 20px;
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 
 .contenedor{
@@ -46,7 +52,7 @@ main{
     justify-content: center;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 128, 255, 0.5);
+    background: linear-gradient(to bottom right, #241c1f, #4a2124, #c9232e);
 
 }
 
@@ -86,7 +92,7 @@ main{
 
 .caja_trasera button:hover{
     background: #fff;
-    color: #46A2FD;
+    color: #a94442;
 }
 
 /*Formularios*/
@@ -116,7 +122,7 @@ main{
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
-    color: #46A2FD;
+    color: #c9232e;
 }
 
 .contenedor_login_register form input{
@@ -134,36 +140,36 @@ main{
     margin-top: 40px;
     border: none;
     font-size: 14px;
-    background: #46A2FD;
+    background: #a94442;
     font-weight: 600;
     cursor: pointer;
     color: white;
     outline: none;
     border-radius: 15px;
-    border: 2px solid #46A2FD;
+    border: 2px solid #a94442;
 }
 .contenedor_login_register form button:hover{
     background: #fff;
-    color: #46A2FD;
-    border: 2px solid #46A2FD;
+    color: #a94442;
+    border: 2px solid #a94442;
 }
 .contenedor_login_register form .boton{
     padding: 10px 40px;
     margin-top: 40px;
     border: none;
     font-size: 14px;
-    background: #46A2FD;
+    background: #c9232e;
     font-weight: 600;
     cursor: pointer;
     color: white;
     outline: none;
     border-radius: 15px;
-    border: 2px solid #46A2FD;
+    border: 2px solid #c9232e;
 }
 .contenedor_login_register form .boton:hover{
     background: #fff;
-    color: #46A2FD;
-    border: 2px solid #46A2FD;
+    color: #a11c24;
+    border: 2px solid #a11c24;
 }
 
 
@@ -218,4 +224,12 @@ main{
     text-align: center;
     margin-top: 30px;
     margin-bottom: -50px;
+}
+.sidebar-logo {
+  max-width: 160px;
+  width: 100%;
+  padding: 4px 8px;
+  display: block;
+  margin: 5px auto;
+  height: auto;
 }

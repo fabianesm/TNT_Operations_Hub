@@ -2,11 +2,18 @@
     require 'php/connect_bd.php';
     session_start();
     $active='usuariosC';
+    $allowed_roles = ['Administrator'];
 
+    // Verifica si el usuario ha iniciado sesión
     if (!isset($_SESSION['id'])){
         header("location: index.php");
         exit();
-    } else{
+    } 
+    if (!in_array($_SESSION['rol'], $allowed_roles)) {
+    header("location: index.php");
+    exit();
+    }
+    else{
         include 'php/header.php';?>
     
         <!-- Page Wrapper -->
@@ -53,7 +60,7 @@
 
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Users</h1>
 
                         <?php 
                             $consulta = "SELECT id, nombre, correo, usuario, rol FROM usuarios";
@@ -64,7 +71,7 @@
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col-11">
-                                        <h6 class="m-0 font-weight-bold text-primary mb-2">Tabla de Usuarios</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary mb-2">Users Table</h6>
                                         <?php include 'php/insert_user.php';?>
                                     </div>
                                     <div class="col-1">
@@ -78,23 +85,13 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Usuario</th>
-                                                <th>Rol</th>
-                                                <th>Acción</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Usuario</th>
-                                                <th>Rol</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <?php while($obj = mysqli_fetch_array($ejecucion)):?>
                                                 <tr>
@@ -129,7 +126,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Fabian Soto 2023</span>
+                            <span>Copyright &copy; Fabian Soto <?= date('Y') ?></span>
                         </div>
                     </div>
                 </footer>
@@ -152,7 +149,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-file"></i> Ingreso de Usuario</h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-file"></i> User Registration</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -161,39 +158,42 @@
                         <form id="usuarioForm_add" action="" method="POST">
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="nombre_completo">Nombre completo:</label>
+                                <label class="control-label" for="nombre_completo">Full Name:</label>
                                 <input type="text" name="nombre_completo" id="nombre_completo" class="form-control" onpaste="return false;">
                             </div>                               
                             <div class="col-sm-6">
-                                <label class="control-label" for="correo">Correo Electrónico:</label>
+                                <label class="control-label" for="correo">Email Address:</label>
                                 <input type="text" name="correo" id="correo" class="form-control" onpaste="return false;">
                             </div>                               
                         </div>
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="usuario">Usuario:</label>
+                                <label class="control-label" for="usuario">Username:</label>
                                 <input type="text" name="usuario" id="usuario" class="form-control" onpaste="return false;">
                             </div>
                             <div class="col-sm-6">
-                                <label class="control-label" for="rol_user">Tipo de Rol:</label>
+                                <label class="control-label" for="rol_user">Role Type:</label>
                                 <select name="rol_user" id="rol_user" class="form-control" style="">
-                                    <option value=''>SELECCIONE ROL</option>
-                                    <option value='empleado'>Empleado</option>
-                                    <option value='gerente'>Gerente</option>
-                                    <option value='admin'>Administrador</option>
+                                    <option value=''>SELECT ROLE</option>
+                                    <option value='Administrator'>Administrator</option>
+                                    <option value='Operations'>Operations</option>
+                                    <option value='Production'>Production</option>
+                                    <option value='PCQI'>PCQI</option>
+                                    <option value='Compliance'>Compliance</option>
+                                    <option value='QA'>QA</option>
                                 </select>
                             </div>                               
                         </div>  
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="contrasena">Contraseña:</label>
+                                <label class="control-label" for="contrasena">Password:</label>
                                 <input type="text" name="contrasena" id="contrasena" class="form-control" onpaste="return false;">
                             </div> 
                         </div>                            
                     </div>
                     <div class="modal-footer">
-                        <input disabled id="GuardarUsuario" name="GuardarUsuario" class="btn btn-primary" type="submit" value="Grabar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <input disabled id="GuardarUsuario" name="GuardarUsuario" class="btn btn-primary" type="submit" value="Save">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
@@ -204,7 +204,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-edit"></i> Editar Usuario <span id="idUsuario_Editar"></span></h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-edit"></i> Edit User <span id="idUsuario_Editar"></span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -215,40 +215,43 @@
                             <input type="hidden" name="idUserEditar" id="idUserEditar">
                             <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="nombre_completo_edit">Nombre completo:</label>
+                                <label class="control-label" for="nombre_completo_edit">Full Name:</label>
                                 <input type="text" name="nombre_completo_edit" id="nombre_completo_edit" class="form-control" onpaste="return false;">
                             </div>                               
                             <div class="col-sm-6">
-                                <label class="control-label" for="correo_edit">Correo Electrónico:</label>
+                                <label class="control-label" for="correo_edit">Email Address:</label>
                                 <input type="text" name="correo_edit" id="correo_edit" class="form-control" onpaste="return false;">
                             </div>                               
                         </div>
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="usuario_edit">Usuario:</label>
+                                <label class="control-label" for="usuario_edit">Username:</label>
                                 <input type="text" name="usuario_edit" id="usuario_edit" class="form-control" onpaste="return false;">
                             </div>
                             <div class="col-sm-6">
-                                <label class="control-label" for="rol_user_edit">Tipo de Rol:</label>
+                                <label class="control-label" for="rol_user_edit">Role Type:</label>
                                 <select name="rol_user_edit" id="rol_user_edit" class="form-control" style="">
-                                    <option value=''>SELECCIONE ROL</option>
-                                    <option value='empleado'>Empleado</option>
-                                    <option value='gerente'>Gerente</option>
-                                    <option value='admin'>Administrador</option>
+                                    <option value=''>SELECT ROLE</option>
+                                    <option value='Administrator'>Administrator</option>
+                                    <option value='Operations'>Operations</option>
+                                    <option value='Production'>Production</option>
+                                    <option value='PCQI'>PCQI</option>
+                                    <option value='Compliance'>Compliance</option>
+                                    <option value='QA'>QA</option>
                                 </select>
                             </div>                               
                         </div>  
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="contrasena_edit">Contraseña:</label>
+                                <label class="control-label" for="contrasena_edit">Password:</label>
                                 <input type="password" name="contrasena_edit" id="contrasena_edit" class="form-control" onpaste="return false;">
                             </div> 
                         </div>                            
                     </div>
                     <div class="modal-footer">
                         <div class="pull-left MensajeModal"></div>
-                        <input disabled id="EditarUsuario" name="EditarUsuario" class="btn btn-primary" type="submit" value="Editar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <input disabled id="EditarUsuario" name="EditarUsuario" class="btn btn-primary" type="submit" value="Update">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
@@ -259,7 +262,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-trash"></i> Eliminar Usuario <span id="idUsuario_Delete"></span></h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-trash"></i> Delete User <span id="idUsuario_Delete"></span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -270,40 +273,43 @@
                             <input type="hidden" name="idUserEliminar" id="idUserEliminar">
                             <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="nombre_completo_delete">Nombre completo:</label>
+                                <label class="control-label" for="nombre_completo_delete">Full Name:</label>
                                 <input type="text" name="nombre_completo_delete" id="nombre_completo_delete" class="form-control" onpaste="return false;" disabled>
                             </div>                               
                             <div class="col-sm-6">
-                                <label class="control-label" for="correo_delete">Correo Electrónico:</label>
+                                <label class="control-label" for="correo_delete">Email Address:</label>
                                 <input type="text" name="correo_delete" id="correo_delete" class="form-control" onpaste="return false;" disabled>
                             </div>                               
                         </div>
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="usuario_delete">Usuario:</label>
+                                <label class="control-label" for="usuario_delete">Username:</label>
                                 <input type="text" name="usuario_delete" id="usuario_delete" class="form-control" onpaste="return false;" disabled>
                             </div>
                             <div class="col-sm-6">
-                                <label class="control-label" for="rol_user_delete">Tipo de Rol:</label>
+                                <label class="control-label" for="rol_user_delete">Role Type:</label>
                                 <select name="rol_user_delete" id="rol_user_delete" class="form-control" style="" disabled>
-                                    <option value=''>SELECCIONE ROL</option>
-                                    <option value='empleado'>Empleado</option>
-                                    <option value='gerente'>Gerente</option>
-                                    <option value='admin'>Administrador</option>
+                                    <option value=''>SELECT ROLE</option>
+                                    <option value='Administrator'>Administrator</option>
+                                    <option value='Operations'>Operations</option>
+                                    <option value='Production'>Production</option>
+                                    <option value='PCQI'>PCQI</option>
+                                    <option value='Compliance'>Compliance</option>
+                                    <option value='QA'>QA</option>
                                 </select>
                             </div>                               
                         </div>  
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="contrasena_delete">Contraseña:</label>
+                                <label class="control-label" for="contrasena_delete">Password:</label>
                                 <input type="password" name="contrasena_delete" id="contrasena_delete" class="form-control" onpaste="return false;" disabled>
                             </div> 
                         </div>                            
                     </div>
                     <div class="modal-footer">
                         <div class="pull-left MensajeModal"></div>
-                        <input id="EliminarUsuario" name="EliminarUsuario" class="btn btn-danger" type="submit" value="Eliminar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <input id="EliminarUsuario" name="EliminarUsuario" class="btn btn-danger" type="submit" value="Delete">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
@@ -315,4 +321,4 @@
         include 'php/logout_modal.php';
         include 'php/footer.php';
     }?>
-    <script src="assets/js/crud_usuarios.js"></script>
+    <script src="assets/js/crud_users.js"></script>

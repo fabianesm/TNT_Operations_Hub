@@ -159,7 +159,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Fabian Soto 2023</span>
+                            <span>Copyright &copy; Fabian Soto <?= date('Y') ?></span>
                         </div>
                     </div>
                 </footer>

@@ -2,11 +2,14 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+<!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink fa-2x"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">FS ERP</div>
+    <div class="sidebar-brand-text mx-3">TNT Operations Hub</div>
+</a> -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php" style="height: 6.375rem;">
+    <img src="assets/images/logo.png" alt="TNT Operations Hub Logo" class="sidebar-logo">
 </a>
 
 <!-- Divider -->
@@ -16,7 +19,7 @@
 <li class="nav-item">
     <a class="nav-link" href="#registro_y_login">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Registro de usuarios</span></a>
+        <span>User Registration</span></a>
 </li>
 
 
@@ -28,14 +31,14 @@
 
 <!-- Heading -->
 <div class="sidebar-heading">
-    Módulos
+    Modules
 </div>
 
  <!-- Nav Item - usuarios -->
  <li class="nav-item ">
     <a class="nav-link" href="#usuarios">
         <i class="fa fa-users"></i>
-        <span>Usuarios</span>
+        <span>User Management</span>
     </a>
 </li>
 
@@ -43,15 +46,15 @@
  <li class="nav-item">
     <a class="nav-link" href="#contratos">
         <i class="fas fa-clipboard-list"></i>
-        <span>Contratos</span>
+        <span>Batch Records</span>
     </a>
 </li>
 
- <!-- Nav Item - permisos_administrativos -->
+ <!-- Nav Item - control_equipos -->
  <li class="nav-item">
     <a class="nav-link" href="#permisos">
         <i class="fas fa-folder"></i>
-        <span>Permisos Administrativos</span>
+        <span>Equipment Control</span>
     </a>
 </li>
 
@@ -59,9 +62,9 @@
 <hr class="sidebar-divider d-none d-md-block">
 
 <!-- Sidebar Toggler (Sidebar) -->
-<div class="text-center d-none d-md-inline">
+<!-- <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
-</div>
+</div> -->
 
 </ul>
 <!-- End of Sidebar -->

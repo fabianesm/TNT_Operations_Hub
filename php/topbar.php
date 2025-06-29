@@ -10,7 +10,7 @@
 <form
     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
     <div class="input-group">
-        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Search..."
             aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <button class="btn btn-primary" type="button">
@@ -35,7 +35,7 @@
             <form class="form-inline mr-auto w-100 navbar-search">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small"
-                        placeholder="Buscar..." aria-label="Search"
+                        placeholder="Search..." aria-label="Search"
                         aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
@@ -59,7 +59,7 @@
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">
-            Centro de alertas
+            ALERT CENTER
             </h6>
             <a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="mr-3">
@@ -68,8 +68,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">28 de febrero, 2023</div>
-                    <span class="font-weight-bold">Notificación 1.</span>
+                    <div class="small text-gray-500">February 28, <?= date('Y') ?></div>
+                    <span class="font-weight-bold">Notification 1.</span>
                 </div>
             </a>
             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -79,8 +79,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">28 de febrero, 2023</div>
-                    Notificación 2.
+                    <div class="small text-gray-500">February 28, <?= date('Y') ?></div>
+                    Notification 2.
                 </div>
             </a>
             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -90,11 +90,11 @@
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">28 de febrero, 2023</div>
-                    Notificación 3.
+                    <div class="small text-gray-500">February 28, <?= date('Y') ?></div>
+                    Notification 3.
                 </div>
             </a>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todas las alertas</a>
+            <a class="dropdown-item text-center small text-gray-500" href="#">Show all alerts</a>
         </div>
     </li>
 
@@ -110,7 +110,7 @@
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">
-            Centro de mensajes
+            MESSAGE CENTER
             </h6>
             <a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="dropdown-list-image mr-3">
@@ -119,7 +119,7 @@
                     <div class="status-indicator bg-success"></div>
                 </div>
                 <div class="font-weight-bold">
-                    <div class="text-truncate">¡Hola! Me pregunto si me pueden ayudar con un problema que he estado teniendo.</div>
+                    <div class="text-truncate">Hi! I was wondering if you could help me with an issue I've been having.</div>
                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                 </div>
             </a>
@@ -130,7 +130,7 @@
                     <div class="status-indicator"></div>
                 </div>
                 <div>
-                    <div class="text-truncate">Tengo los archivos que pediste el mes pasado, ¿cómo te gustaría que te las enviaran?</div>
+                    <div class="text-truncate">I have the files you requested last month, how would you like me to send them to you?</div>
                     <div class="small text-gray-500">Jae Chun · 1d</div>
                 </div>
             </a>
@@ -141,22 +141,11 @@
                     <div class="status-indicator bg-warning"></div>
                 </div>
                 <div>
-                    <div class="text-truncate">El informe del mes pasado se ve muy bien, estoy muy contento con el progreso hasta ahora, ¡sigan con el buen trabajo!</div>
+                    <div class="text-truncate">Last month's report looks great, I'm very happy with the progress so far. Keep up the good work!</div>
                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                 </div>
             </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                        alt="...">
-                    <div class="status-indicator bg-success"></div>
-                </div>
-                <div>
-                    <div class="text-truncate">La razón por la que pregunto es porque alguien me dijo que la gente le dice esto a todos los perros, incluso si no son buenos...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                </div>
-            </a>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Leer más mensajes</a>
+            <a class="dropdown-item text-center small text-gray-500" href="#">Read more messages</a>
         </div>
     </li>
 
@@ -166,14 +155,14 @@
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo "Hola" ." " . $_SESSION['nombre'];?></span>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo "Hello" ." " . $_SESSION['nombre'];?></span>
             <img class="img-profile rounded-circle"
                 src="assets/images/undraw_profile.svg">
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown">
-            <!-- <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="#">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
             </a>
@@ -184,11 +173,11 @@
             <a class="dropdown-item" href="#">
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                 Activity Log
-            </a> -->
+            </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Cerrar sesión
+                Log Out
             </a>
         </div>
     </li>

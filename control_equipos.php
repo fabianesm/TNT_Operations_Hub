@@ -1,7 +1,7 @@
 <?php 
     require 'php/connect_bd.php';
     session_start();
-    $active='permisos_administrativos';
+    $active='control_equipos';
 
     if (!isset($_SESSION['id'])){
         header("location: index.php");
@@ -50,7 +50,7 @@
 
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Permisos Administrativos</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Control de Equipos</h1>
 
                         <?php 
                             $consulta = "SELECT p.id, motivo, u2.nombre 'empleado',u.nombre 'jefatura', dias, descripcion FROM permisos p INNER JOIN usuarios u ON u.id = p.jefatura INNER JOIN usuarios u2 ON u2.id=p.empleado;";
@@ -65,9 +65,7 @@
                                         <?php include 'php/insert_permisos.php';?>
                                     </div>
                                     <div class="col-1">
-                                    <?php if($_SESSION['rol']=="admin" || $_SESSION['rol']=="empleado"):?>
                                         <button type="submit" id="addpermiso" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddPermiso"><i class="fa fa-plus"></i></button>
-                                    <?php endif?>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +141,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Fabian Soto 2023</span>
+                            <span>Copyright &copy; Fabian Soto <?= date('Y') ?></span>
                         </div>
                     </div>
                 </footer>
@@ -395,4 +393,4 @@
         include 'php/logout_modal.php';
         include 'php/footer.php';
     }?>
-    <script src="assets/js/crud_permisos_administrativos.js"></script>
+    <script src="assets/js/crud_control_equipos.js"></script>
