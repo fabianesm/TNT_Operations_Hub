@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Proyecto universitario - Fabian Soto">
+    <meta name="description" content="Total Nutration Technology - ERP System | Fabian Soto">
     <meta name="author" content="Fabian Soto">
     <title>TNT Operations Hub</title>
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
