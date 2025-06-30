@@ -42,15 +42,15 @@
     </a>
 </li>
 
- <!-- Nav Item - contratos -->
+ <!-- Nav Item - batch_records -->
  <li class="nav-item">
-    <a class="nav-link" href="#contratos">
+    <a class="nav-link" href="#batch_records">
         <i class="fas fa-clipboard-list"></i>
         <span>Batch Records</span>
     </a>
 </li>
 
- <!-- Nav Item - control_equipos -->
+ <!-- Nav Item - equipment_control -->
  <li class="nav-item">
     <a class="nav-link" href="#permisos">
         <i class="fas fa-folder"></i>

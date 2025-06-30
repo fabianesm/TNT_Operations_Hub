@@ -14,10 +14,10 @@
                 $motivo=$row['motivo'];
                 $jefatura=$row['jefatura'];
                 $empleado=$row['empleado'];
-                $dias=$row['dias'];
+                $status=$row['dias'];
                 $descripcion=$row['descripcion'];
                 
-                $data[] = array('motivo'=> $motivo, 'jefatura'=> $jefatura, 'empleado'=> $empleado, 'dias'=> $dias, 'descripcion'=> $descripcion);            
+                $data[] = array('motivo'=> $motivo, 'jefatura'=> $jefatura, 'empleado'=> $empleado, 'dias'=> $status, 'descripcion'=> $descripcion);            
             }
 
             $json_string = json_encode($data);

@@ -46,18 +46,18 @@
 <?php endif?>
 
 <?php if($_SESSION['rol']=="Administrator" || $_SESSION['rol']=="Production" || $_SESSION['rol']=="QA"):?>
- <!-- Nav Item - contratos -->
- <li class="nav-item <?php if($active=='contratos'){echo 'active';}?>">
-    <a class="nav-link" href="contratos.php">
+ <!-- Nav Item - batch_records -->
+ <li class="nav-item <?php if($active=='batch_records'){echo 'active';}?>">
+    <a class="nav-link" href="batch_records.php">
         <i class="fas fa-clipboard-list"></i>
         <span>Batch Records</span>
     </a>
 </li>
 <?php endif?>
 
- <!-- Nav Item - control_equipos -->
- <li class="nav-item <?php if($active=='control_equipos'){echo 'active';}?>">
-    <a class="nav-link" href="control_equipos.php">
+ <!-- Nav Item - equipment_control -->
+ <li class="nav-item <?php if($active=='equipment_control'){echo 'active';}?>">
+    <a class="nav-link" href="equipment_control.php">
         <i class="fas fa-folder"></i>
         <span>Equipment Control</span>
     </a>

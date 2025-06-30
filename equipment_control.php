@@ -1,7 +1,7 @@
 <?php 
     require 'php/connect_bd.php';
     session_start();
-    $active='control_equipos';
+    $active='equipment_control';
 
     if (!isset($_SESSION['id'])){
         header("location: index.php");
@@ -28,21 +28,21 @@
                         <?php 
                             $keyVal = (!isset($_REQUEST['llavegrabar'])) ? $llavegrabar = "none" : $llavegrabar = $_REQUEST['llavegrabar'];
                             switch ($llavegrabar) {
-                                case 'EDITAR_Permiso':
-                                    $idPermisoEditar = $_REQUEST['idPermisoEditar'];
-                                    $motivo_edit = $_REQUEST['motivo_edit'];
+                                case 'EDITAR_Equipment':
+                                    $idEquipmentEditar = $_REQUEST['idEquipmentEditar'];
+                                    $EquipmentType_edit = $_REQUEST['EquipmentType_edit'];
                                     $empleado_edit = $_REQUEST['empleado_edit'];
-                                    $jefatura_edit = $_REQUEST['jefatura_edit'];
-                                    $dias_edit = $_REQUEST['dias_edit'];
+                                    $supervisor_edit = $_REQUEST['supervisor_edit'];
+                                    $status_edit = $_REQUEST['status_edit'];
                                     $descripcion_edit = $_REQUEST['descripcion_edit'];
     
-                                    $sqledit = "UPDATE permisos SET motivo ='$motivo_edit', empleado = '$empleado_edit', jefatura = '$jefatura_edit', dias = '$dias_edit', descripcion = '$descripcion_edit' WHERE id = '$idPermisoEditar'";
+                                    $sqledit = "UPDATE permisos SET motivo ='$EquipmentType_edit', empleado = '$empleado_edit', jefatura = '$supervisor_edit', dias = '$status_edit', descripcion = '$descripcion_edit' WHERE id = '$idEquipmentEditar'";
                                     $conexion->query($sqledit);
                                     break;
-                                case 'Eliminar_Permiso':
-                                    $idPermisoEliminar = $_REQUEST['idPermisoEliminar'];
+                                case 'Eliminar_Equipment':
+                                    $idEquipmentEliminar = $_REQUEST['idEquipmentEliminar'];
 
-                                    $sqldelete = "DELETE FROM permisos WHERE id = '$idPermisoEliminar'";
+                                    $sqldelete = "DELETE FROM permisos WHERE id = '$idEquipmentEliminar'";
                                     $conexion->query($sqldelete);
                                     break;
                             }
@@ -50,7 +50,7 @@
 
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Control de Equipos</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Equipment Control</h1>
 
                         <?php 
                             $consulta = "SELECT p.id, motivo, u2.nombre 'empleado',u.nombre 'jefatura', dias, descripcion FROM permisos p INNER JOIN usuarios u ON u.id = p.jefatura INNER JOIN usuarios u2 ON u2.id=p.empleado;";
@@ -61,11 +61,11 @@
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col-11">
-                                        <h6 class="m-0 font-weight-bold text-primary mb-2">Tabla de Permisos</h6>
-                                        <?php include 'php/insert_permisos.php';?>
+                                        <h6 class="m-0 font-weight-bold text-primary mb-2">Equipment Log</h6>
+                                        <?php include 'php/insert_equipment.php';?>
                                     </div>
                                     <div class="col-1">
-                                        <button type="submit" id="addpermiso" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddPermiso"><i class="fa fa-plus"></i></button>
+                                        <button type="submit" id="addpermiso" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddEquipment"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -75,25 +75,14 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Motivo</th>
-                                                <th>Empleado</th>
-                                                <th>Jefatura</th>
-                                                <th>Días de permiso</th>
-                                                <th>Descripción</th>
-                                                <th>Acción</th>
+                                                <th>Equipment Type</th>
+                                                <th>Employee</th>
+                                                <th>Supervisor</th>
+                                                <th>Status</th>
+                                                <th>Comments</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Motivo</th>
-                                                <th>Jefatura</th>
-                                                <th>Empleado</th>
-                                                <th>Días de permiso</th>
-                                                <th>Descripción</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <?php while($obj = mysqli_fetch_array($ejecucion)):?>
                                                 <tr>
@@ -101,25 +90,31 @@
                                                     <td><?php 
                                                         switch ($obj['motivo']) {
                                                             case 1:
-                                                                echo "Vacaciones";
+                                                                echo "Scanner";
                                                                 break;
                                                             case 2:
-                                                                echo "Asuntos Personales";
-                                                                break;
-                                                            case 3:
-                                                                echo "Enfermedad";
+                                                                echo "Knife";
                                                                 break;
                                                         }
                                                     ?></td>
                                                     <td><?= $obj['jefatura']?></td>
                                                     <td><?= $obj['empleado']?></td>
-                                                    <td><?= $obj['dias']?></td>
+                                                    <td><?php 
+                                                        switch ($obj['dias']) {
+                                                            case 1:
+                                                                echo "Assigned";
+                                                                break;
+                                                            case 2:
+                                                                echo "Returned";
+                                                                break;
+                                                        }
+                                                    ?></td>
                                                     <td><?= $obj['descripcion']?></td>
                                                     <td>
-                                                    <a id="btn_edit" href="#" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#ModalEditPermiso" data-id="<?= $obj['id']?>">
+                                                    <a id="btn_edit" href="#" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#ModalEditEquipment" data-id="<?= $obj['id']?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a id="btn_delete" href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalDeletePermiso" data-id="<?= $obj['id']?>">
+                                                    <a id="btn_delete" href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalDeleteEquipment" data-id="<?= $obj['id']?>">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                     </td>
@@ -159,34 +154,33 @@
         </a>
 
         <!-- MODALES -->
-        <!-- MODAL AGREGAR PERMISO -->
-        <div class="modal fade" id="ModalAddPermiso" tabindex="-1" role="dialog">
+        <!-- MODAL New Equipment Entry -->
+        <div class="modal fade" id="ModalAddEquipment" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-file"></i> Ingreso de Permiso</h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-file"></i> New Equipment Entry</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="permisoForm_add" action="" method="POST">
+                        <form id="EquipmentForm_add" action="" method="POST">
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="motivo">Motivo:</label>
-                                <select name="motivo" id="motivo" class="form-control" >
-                                    <option value=''>Indique Motivo</option>
-                                    <option value='1'>Vacaciones</option>
-                                    <option value='2'>Asuntos Personales</option>
-                                    <option value='3'>Enfermedad</option>
+                                <label class="control-label" for="EquipmentType">Equipment Type:</label>
+                                <select name="EquipmentType" id="EquipmentType" class="form-control" >
+                                    <option value=''>Select Equipment</option>
+                                    <option value='1'>Scanner</option>
+                                    <option value='2'>Knife</option>
                                 </select>
                             </div>      
                             <div class="col-sm-6">
-                                <label class="control-label" for="jefatura">Jefatura:</label>
-                                <select name="jefatura" id="jefatura" class="form-control" >
-                                    <option value=''>Indique Jefatura</option>
+                                <label class="control-label" for="supervisor_form">Supervisor:</label>
+                                <select name="supervisor_form" id="supervisor_form" class="form-control" >
+                                    <option value=''>Select Supervisor</option>
                                     <?php
-                                        $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='gerente'");
+                                        $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Production'");
                                         while ($row = mysqli_fetch_array($select)) {
                                             $id = $row['id']; 
                                             $nombres = $row['nombre'];
@@ -199,11 +193,11 @@
                         </div>
                         <div class="row pt-15">
                             <div class="col-sm-6">
-                                <label class="control-label" for="empleado">Empleado:</label>
+                                <label class="control-label" for="empleado">Employee:</label>
                                 <select name="empleado" id="empleado" class="form-control" >
-                                    <option value=''>Indique Empleado</option>
+                                    <option value=''>Select Employee</option>
                                     <?php
-                                        $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='empleado'");
+                                        $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Employee'");
                                         while ($row = mysqli_fetch_array($select)) {
                                             $id = $row['id']; 
                                             $nombres = $row['nombre'];
@@ -214,56 +208,59 @@
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label class="control-label" for="dias">Días de Permiso:</label>
-                                <input type="number" name="dias" id="dias" class="form-control" onpaste="return false;" min="0" max="4">
+                                <label class="control-label" for="status">Status:</label>
+                                <select name="status" id="status" class="form-control" >
+                                    <option value=''>Select Status</option>
+                                    <option value='1'>Assigned</option>
+                                    <option value='2'>Returned</option>
+                                </select>
                             </div>                             
                         </div>  
                         <div class="row pt-15">
                             <div class="col-sm-12">
-                                <label for="descripcion">Descripción:</label>
+                                <label for="descripcion">Comments:</label>
                                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
                             </div>
                         </div>                            
                     </div>
                     <div class="modal-footer">
                         <div class="pull-left MensajeModal"></div>
-                        <input disabled id="GuardarPermiso" name="GuardarPermiso" class="btn btn-primary" type="submit" value="Grabar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <input disabled id="SaveEquipment" name="SaveEquipment" class="btn btn-primary" type="submit" value="Save">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
             </div>
         </div>
-        <!-- MODAL EDITAR Permiso -->
-        <div class="modal fade" id="ModalEditPermiso" tabindex="-1" role="dialog">
+        <!-- MODAL Edit Equipment Log -->
+        <div class="modal fade" id="ModalEditEquipment" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-edit"></i> Editar Permiso <span id="idPermiso_Editar"></span></h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-edit"></i> Edit Equipment Log <span id="idEquipment_Editar"></span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="permisoForm_edit" action="" method="POST">
-                            <input type="hidden" name="llavegrabar" value="EDITAR_Permiso">
-                            <input type="hidden" name="idPermisoEditar" id="idPermisoEditar">
+                        <form id="EquipmentForm_edit" action="" method="POST">
+                            <input type="hidden" name="llavegrabar" value="EDITAR_Equipment">
+                            <input type="hidden" name="idEquipmentEditar" id="idEquipmentEditar">
                             <div class="row pt-15">
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="motivo_edit">Motivo:</label>
-                                    <select name="motivo_edit" id="motivo_edit" class="form-control" >
-                                        <option value=''>Indique Motivo</option>
-                                        <option value='1'>Vacaciones</option>
-                                        <option value='2'>Asuntos Personales</option>
-                                        <option value='3'>Enfermedad</option>
+                                    <label class="control-label" for="EquipmentType_edit">Equipment Type:</label>
+                                    <select name="EquipmentType_edit" id="EquipmentType_edit" class="form-control" >
+                                        <option value=''>Select Equipment</option>
+                                        <option value='1'>Scanner</option>
+                                        <option value='2'>Knife</option>
                                     </select>
                                 </div>      
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="jefatura_edit">Jefatura:</label>
-                                    <select name="jefatura_edit" id="jefatura_edit" class="form-control" >
-                                        <option value=''>Indique Jefatura</option>
+                                    <label class="control-label" for="supervisor_edit">Supervisor:</label>
+                                    <select name="supervisor_edit" id="supervisor_edit" class="form-control" >
+                                        <option value=''>Select Supervisor</option>
                                         <?php
-                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='gerente'");
+                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Production'");
                                             while ($row = mysqli_fetch_array($select)) {
                                                 $id = $row['id']; 
                                                 $nombres = $row['nombre'];
@@ -276,11 +273,11 @@
                             </div>
                             <div class="row pt-15">
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="empleado_edit">Empleado:</label>
+                                    <label class="control-label" for="empleado_edit">Employee:</label>
                                     <select name="empleado_edit" id="empleado_edit" class="form-control" >
-                                        <option value=''>Indique Empleado</option>
+                                        <option value=''>Select Employee</option>
                                         <?php
-                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='empleado'");
+                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Employee'");
                                             while ($row = mysqli_fetch_array($select)) {
                                                 $id = $row['id']; 
                                                 $nombres = $row['nombre'];
@@ -291,56 +288,59 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="dias_edit">Días de Permiso:</label>
-                                    <input type="number" name="dias_edit" id="dias_edit" class="form-control" onpaste="return false;" min="0" max="4">
+                                    <label class="control-label" for="status_edit">Status:</label>
+                                    <select name="status_edit" id="status_edit" class="form-control" >
+                                        <option value=''>Select Status</option>
+                                        <option value='1'>Assigned</option>
+                                        <option value='2'>Returned</option>
+                                    </select>
                                 </div>                             
                             </div>  
                             <div class="row pt-15">
                                 <div class="col-sm-12">
-                                    <label for="descripcion_edit">Descripción:</label>
+                                    <label for="descripcion_edit">Comments:</label>
                                     <textarea class="form-control" id="descripcion_edit" name="descripcion_edit" rows="3"></textarea>
                                 </div>
                             </div>                            
                     </div>
                     <div class="modal-footer">
                         <div class="pull-left MensajeModal"></div>
-                        <input disabled id="EditarPermiso" name="EditarPermiso" class="btn btn-primary" type="submit" value="Editar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <input disabled id="EditarEquipment" name="EditarEquipment" class="btn btn-primary" type="submit" value="Update">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
             </div>
         </div>
-        <!-- MODAL ELIMINAR PERMISO -->
-        <div class="modal fade" id="ModalDeletePermiso" tabindex="-1" role="dialog">
+        <!-- MODAL Delete Equipment Log -->
+        <div class="modal fade" id="ModalDeleteEquipment" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" ><i class="fa fa-trash"></i> Eliminar Permiso <span id="idPermiso_Delete"></span></h5>
+                        <h5 class="modal-title text-white" ><i class="fa fa-trash"></i> Delete Equipment Log <span id="idEquipment_Delete"></span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="permisoForm_delete" action="" method="POST">
-                            <input type="hidden" name="llavegrabar" value="Eliminar_Permiso">
-                            <input type="hidden" name="idPermisoEliminar" id="idPermisoEliminar">
+                        <form id="EquipmentForm_delete" action="" method="POST">
+                            <input type="hidden" name="llavegrabar" value="Eliminar_Equipment">
+                            <input type="hidden" name="idEquipmentEliminar" id="idEquipmentEliminar">
                             <div class="row pt-15">
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="motivo_delete">Motivo:</label>
-                                    <select name="motivo_delete" id="motivo_delete" class="form-control"  disabled>
-                                        <option value=''>Indique Motivo</option>
-                                        <option value='1'>Vacaciones</option>
-                                        <option value='2'>Asuntos Personales</option>
-                                        <option value='3'>Enfermedad</option>
+                                    <label class="control-label" for="EquipmentType_delete">Equipment Type:</label>
+                                    <select name="EquipmentType_delete" id="EquipmentType_delete" class="form-control"  disabled>
+                                        <option value=''>Select Equipment</option>
+                                        <option value='1'>Scanner</option>
+                                        <option value='2'>Knife</option>
                                     </select>
                                 </div>      
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="jefatura_delete">Jefatura:</label>
-                                    <select name="jefatura_delete" id="jefatura_delete" class="form-control"  disabled>
-                                        <option value=''>Indique Jefatura</option>
+                                    <label class="control-label" for="supervisor_delete">Supervisor:</label>
+                                    <select name="supervisor_delete" id="supervisor_delete" class="form-control"  disabled>
+                                        <option value=''>Select Supervisor</option>
                                         <?php
-                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='gerente'");
+                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Production'");
                                             while ($row = mysqli_fetch_array($select)) {
                                                 $id = $row['id']; 
                                                 $nombres = $row['nombre'];
@@ -353,11 +353,11 @@
                             </div>
                             <div class="row pt-15">
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="empleado_delete">Empleado:</label>
+                                    <label class="control-label" for="empleado_delete">Employee:</label>
                                     <select name="empleado_delete" id="empleado_delete" class="form-control" disabled>
-                                        <option value=''>Indique Empleado</option>
+                                        <option value=''>Select Employee</option>
                                         <?php
-                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='empleado'");
+                                            $select = $conexion->query("SELECT id, nombre FROM usuarios WHERE rol='Employee'");
                                             while ($row = mysqli_fetch_array($select)) {
                                                 $id = $row['id']; 
                                                 $nombres = $row['nombre'];
@@ -368,20 +368,25 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="control-label" for="dias_delete">Días de Permiso:</label>
-                                    <input type="number" name="dias_delete" id="dias_delete" class="form-control" onpaste="return false;" min="0" max="4" disabled>
+                                    <label class="control-label" for="status_delete">Status:</label>
+                                    <select name="status_delete" id="status_delete" class="form-control" disabled>
+                                        <option value=''>Select Status</option>
+                                        <option value='1'>Assigned</option>
+                                        <option value='2'>Returned</option>
+                                    </select>
                                 </div>                             
                             </div>  
                             <div class="row pt-15">
                                 <div class="col-sm-12">
-                                    <label for="descripcion_delete">Descripción:</label>
+                                    <label for="descripcion_delete">Comments:</label>
                                     <textarea class="form-control" id="descripcion_delete" name="descripcion_delete" rows="3" disabled></textarea>
                                 </div>
                             </div>                        
                     </div>
                     <div class="modal-footer">
-                        <input id="EliminarPermiso" name="EliminarPermiso" class="btn btn-danger" type="submit" value="Eliminar">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                        <div class="pull-left MensajeModal"></div>
+                        <input id="EliminarEquipment" name="EliminarEquipment" class="btn btn-danger" type="submit" value="Delete">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </form>
                 </div>
@@ -393,4 +398,4 @@
         include 'php/logout_modal.php';
         include 'php/footer.php';
     }?>
-    <script src="assets/js/crud_control_equipos.js"></script>
+    <script src="assets/js/crud_equipment_control.js"></script>

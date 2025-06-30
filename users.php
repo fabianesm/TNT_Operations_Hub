@@ -176,6 +176,7 @@
                                 <select name="rol_user" id="rol_user" class="form-control" style="">
                                     <option value=''>SELECT ROLE</option>
                                     <option value='Administrator'>Administrator</option>
+                                    <option value='Employee'>Employee</option>
                                     <option value='Operations'>Operations</option>
                                     <option value='Production'>Production</option>
                                     <option value='PCQI'>PCQI</option>
@@ -233,6 +234,7 @@
                                 <select name="rol_user_edit" id="rol_user_edit" class="form-control" style="">
                                     <option value=''>SELECT ROLE</option>
                                     <option value='Administrator'>Administrator</option>
+                                    <option value='Employee'>Employee</option>
                                     <option value='Operations'>Operations</option>
                                     <option value='Production'>Production</option>
                                     <option value='PCQI'>PCQI</option>
@@ -291,6 +293,7 @@
                                 <select name="rol_user_delete" id="rol_user_delete" class="form-control" style="" disabled>
                                     <option value=''>SELECT ROLE</option>
                                     <option value='Administrator'>Administrator</option>
+                                    <option value='Employee'>Employee</option>
                                     <option value='Operations'>Operations</option>
                                     <option value='Production'>Production</option>
                                     <option value='PCQI'>PCQI</option>

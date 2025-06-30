@@ -56,7 +56,7 @@
 
                             <!-- productos Card Example -->
                             <?php 
-                            $consulta = "SELECT count(*) AS cantidad FROM contratos";
+                            $consulta = "SELECT count(*) AS cantidad FROM batch_records";
                             $ejecucion = mysqli_query($conexion, $consulta);
                             $obj = mysqli_fetch_array($ejecucion);
                             if($_SESSION['rol']=="Administrator" || $_SESSION['rol']=="Production" || $_SESSION['rol']=="QA"):
