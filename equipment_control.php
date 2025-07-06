@@ -97,8 +97,8 @@
                                                                 break;
                                                         }
                                                     ?></td>
-                                                    <td><?= $obj['jefatura']?></td>
                                                     <td><?= $obj['empleado']?></td>
+                                                    <td><?= $obj['jefatura']?></td>
                                                     <td><?php 
                                                         switch ($obj['dias']) {
                                                             case 1:
